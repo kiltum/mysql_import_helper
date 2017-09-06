@@ -19,9 +19,15 @@ optional arguments:
                         Add code for creating and using DATABASE
  ```
 
-1. -b insert some file before main sql stream. Say for database creation, setting options and limits.
-2. -a insert some file after main sql stream. Useful for comitting changes, activating triggers, etc.
-3. -l insert "COMMIT;" after NUM inserts. Helps when you restore big dump on small machine
-4. -d add "DROP/CREATE database" in sql stream. For fast re-importing.
+- -b insert some file before main sql stream. Say for database creation, setting options and limits.
+- -a insert some file after main sql stream. Useful for comitting changes, activating triggers, etc.
+- -l insert "COMMIT;" after NUM inserts. Helps when you restore big dump on small machine
+- -d add "DROP/CREATE database" in sql stream. For fast re-importing.
+
+Example:
+
+```
+gzip -d -c file.sql.gz | mih.py -a re-index.sql -l 1000 -d test | mysql -u root
+```
 
 This script make in "as fast as possible" mode, no "no errors" flag here.
